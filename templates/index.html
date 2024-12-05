@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stock Quote App</title>
+    <title>Stock Search</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -26,17 +26,27 @@
             padding: 10px 20px;
             margin: 5px;
         }
+        #extra-buttons {
+            display: none;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Stock Quote App</h1>
+        <h1>Stock Search</h1>
         <div class="input-group">
             <label for="ticker">Enter Stock Ticker:</label>
             <input type="text" id="ticker" name="ticker">
         </div>
-        <button onclick="getStockQuote()">Search</button>
+        <button onclick="getStock()">Search</button>
         <button onclick="clearInput()">Clear</button>
+
+        <div id="error-container" style="color: red; margin-top: 20px;"></div>
+        <div id="extra-buttons">
+            <button id="companyOutlook" onclick="companyOutlook()">Company Outlook</button>
+            <button id="stockSummary" onclick="stockSummary()">Stock Summary</button>
+        </div>
+        <div id="table-container"></div>
     </div>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
