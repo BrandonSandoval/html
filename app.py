@@ -71,7 +71,13 @@ def get_stock_summary():
             # Calculate change and percent safely
             change = round(lastPrice - prevClose, 2)
             changePercent = round((change / prevClose) * 100, 2)
-
+            changeImage = '/static/GreenArrowUP.png'
+            changePercentImage = '/static/GreenArrowUP.png'
+            if change < 0:
+                changeImage = '/static/RedArrowDOWN.png'
+            if changePercent < 0:
+                changePercentImage = '/static/RedArrowDOWN.png'
+            
             # Build the JSON response, omitting None values
             result = {
                 'ticker': ticker,
@@ -83,6 +89,8 @@ def get_stock_summary():
                 'lastPrice': lastPrice,
                 'change': change,
                 'changePercent': changePercent,
+                'changeImage': changeImage,
+                'changePercentImage': changePercentImage,
                 'volume': volume,
             }
             return jsonify({k: v for k, v in result.items()})

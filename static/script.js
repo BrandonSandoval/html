@@ -12,7 +12,7 @@ function getStock() {
         return;
     }
 
-    fetch(`/stock?ticker=${ticker}`)
+    fetch(`http://ec2-50-16-157-181.compute-1.amazonaws.com/stock?ticker=${ticker}`)
         .then(response => response.json())
         .then(data => {
             if (data.error) {
@@ -45,7 +45,7 @@ function companyOutlook() {
         return;
     }
 
-    fetch(`/stock?ticker=${ticker}`)
+    fetch(`http://ec2-50-16-157-181.compute-1.amazonaws.com/stock?ticker=${ticker}`)
         .then(response => response.json())
         .then(data => {
             if (data.error) {
@@ -94,7 +94,7 @@ function stockSummary() {
         return;
     }
 
-    fetch(`/stock/summary?ticker=${ticker}`)
+    fetch(`http://ec2-50-16-157-181.compute-1.amazonaws.com/stock/summary?ticker=${ticker}`)
         .then(response => response.json())
         .then(data => {
             if (data.error) {
@@ -118,8 +118,11 @@ function stockSummary() {
                     { label: 'High Price', value: data.highPrice},
                     { label: 'Low Price', value: data.lowPrice},
                     { label: 'Last Price', value: data.lastPrice},
-                    { label: 'Change', value: data.change},
-                    { label: 'Change Percent', value: data.changePercent},
+                    { label: 'Change', value: `<span>${data.change}</span>
+                            <img src="${data.changeImage}" alt="Change Arrow" style="height: 20px; margin-left: 5px;"/>`},
+                    {  label: 'Change Percent', 
+                        value: `<span>${data.changePercent}</span>
+                            <img src="${data.changePercentImage}" alt="Change Percent Arrow" style="height: 20px; margin-left: 5px;"/>` },
                     { label: 'Number of Shares Traded', value: data.volume}
                 ];
 
